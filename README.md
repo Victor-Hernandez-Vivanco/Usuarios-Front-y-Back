@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.8.
@@ -25,3 +26,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+=======
+# Usuarios-Front-y-Back
+Angular Materials --> Frontend  NodeJs --> Backend Ts --> Backend  MySql --> BBDD  No usa ORM ya que conectamos directamente con sentencias SQL con el servidor
+>>>>>>> d6c27597d88093fba2e2f32f77855552565a93e8
