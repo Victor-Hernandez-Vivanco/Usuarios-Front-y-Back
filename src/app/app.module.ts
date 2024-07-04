@@ -6,13 +6,7 @@ import { AppComponent } from './app.component';
 import { ListPersonasComponent } from './components/list-personas/list-personas.component';
 import { AgregarEditarPersonaComponent } from './components/agregar-editar-persona/agregar-editar-persona.component';
 
-/**
- * Componentes de Angular Material
- */
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,14 +14,7 @@ import { MatTableModule } from '@angular/material/table';
     ListPersonasComponent,
     AgregarEditarPersonaComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatSlideToggleModule,
-    MatToolbarModule,
-    MatCardModule,
-    MatTableModule,
-  ],
+  imports: [BrowserModule, BrowserAnimationsModule, SharedModule],
   providers: [],
   bootstrap: [AppComponent],
 })

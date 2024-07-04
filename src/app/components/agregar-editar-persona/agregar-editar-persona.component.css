@@ -1,0 +1,25 @@
+mat-form-field {
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    background: transparent;
+}
+
+.column {
+    flex: 50%;
+    margin: 10px 10px 10px 10px;
+}
+
+.contentDialog {
+    background-color: rgba(205, 204, 204, 0.693);
+    border: 2px solid #000;
+}
+
+.error {
+    color: red;
+    margin-top: -15px;
+    font-size: xx-small;
+} 
+

@@ -1,23 +1,55 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Persona } from 'src/app/interfaces/persona';
+import { AgregarEditarPersonaComponent } from '../agregar-editar-persona/agregar-editar-persona.component';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
+const listPersonas: Persona[] = [
+  {
+    nombre: 'Juan',
+    apellido: 'Perez',
+    correo: 'juan@gmail.com',
+    tipoDocumento: 'CC',
+    documento: 123456789,
+    fechaNacimiento: new Date(),
+  },
+  {
+    nombre: 'Maria',
+    apellido: 'Magdalena',
+    correo: 'mariaM@gmail.com',
+    tipoDocumento: 'DNI',
+    documento: 987654321,
+    fechaNacimiento: new Date(),
+  },
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
+  {
+    nombre: 'Maria',
+    apellido: 'Magdalena',
+    correo: 'mariaM@gmail.com',
+    tipoDocumento: 'DNI',
+    documento: 987654321,
+    fechaNacimiento: new Date(),
+  },
+
+  {
+    nombre: 'Maria',
+    apellido: 'Magdalena',
+    correo: 'mariaM@gmail.com',
+    tipoDocumento: 'DNI',
+    documento: 987654321,
+    fechaNacimiento: new Date(),
+  },
+
+  {
+    nombre: 'Maria',
+    apellido: 'Magdalena',
+    correo: 'mariaM@gmail.com',
+    tipoDocumento: 'DNI',
+    documento: 987654321,
+    fechaNacimiento: new Date(),
+  },
 ];
 
 @Component({
@@ -25,7 +57,46 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './list-personas.component.html',
   styleUrls: ['./list-personas.component.css'],
 })
-export class ListPersonasComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+export class ListPersonasComponent implements OnInit, AfterViewInit {
+  displayedColumns: string[] = [
+    'nombre',
+    'apellido',
+    'correo',
+    'tipoDocumento',
+    'documento',
+    'fechaNacimiento',
+    'acciones',
+  ];
+  dataSource = new MatTableDataSource<Persona>();
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(public dialog: MatDialog) {
+    this.dataSource = new MatTableDataSource(listPersonas);
+  }
+
+  ngOnInit(): void {}
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.paginator._intl.itemsPerPageLabel = 'Elementos por página';
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  addEditPersona() {
+    const dialogRef = this.dialog.open(AgregarEditarPersonaComponent, {
+      width: '550px',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }
